@@ -1,0 +1,45 @@
+<div class="body">
+  <div class="col-md-12">
+    <h4 class="text-center">Informaci&oacute;n Personal</h4>
+  </div>
+  <div class="col-md-6 text-right div-body">
+    <form #formInformacion="ngForm" class="form">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="persona.nombre">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="apellido">Apellido</label>
+          <input type="text" class="form-control" name="apellido" id="apellido" [(ngModel)]="persona.apellido">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="titulo">T&iacute;tulo Profesional</label>
+          <input type="text" class="form-control" name="titulo" id="titulo" [(ngModel)]="persona.tituloProfesional">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="lugar">Lugar Nacimiento</label>
+          <input type="text" class="form-control" name="lugar" id="lugar" [(ngModel)]="persona.lugarNacimiento">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="correo">Correo</label>
+          <input type="text" class="form-control" name="correo" id="correo" [(ngModel)]="persona.correo">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="fecha">Fecha Nacimiento</label>
+          <input type="text" class="form-control" name="fecha" id="fecha" [(ngModel)]="persona.fechaNacimiento">
+        </div>
+        <div class="form-group col-md-2">
+          <label for="telefono">Telefono</label>
+          <input type="text" class="form-control" name="telefono" id="telefono" [(ngModel)]="persona.telefono">
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" (click)='crearInformacionPersona()'>Guardar</button>
+    </form>
+  </div>
+</div>

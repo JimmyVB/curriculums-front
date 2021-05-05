@@ -1,0 +1,32 @@
+<div class="body">
+  <div class="col-md-12">
+    <h4 class="text-center">Experiencia Laboral</h4>
+  </div>
+  <div class="col-md-6 text-right div-body">
+    <form #formInformacion="ngForm" class="form">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="titulo">Titulo</label>
+          <input type="text" class="form-control" name="titulo" id="titulo" [(ngModel)]="experienciaLaboral.titulo">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="descripcion">Descripcion</label>
+          <input type="text" class="form-control" name="descripcion" id="descripcion"
+            [(ngModel)]="experienciaLaboral.descripcion">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inicio">Fecha Inicio</label>
+          <input type="text" class="form-control" name="inicio" id="inicio"
+            [(ngModel)]="experienciaLaboral.fechaInicio">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="fin">Fecha Fin</label>
+          <input type="text" class="form-control" name="fin" id="fin" [(ngModel)]="experienciaLaboral.fechaFin">
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" (click)='crearExperienciaLaboral()'>Guardar</button>
+    </form>
+  </div>
+</div>
