@@ -13,9 +13,10 @@ import { LoginComponent } from './seguridad/usuarios/login.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from './usuarios/guards/auth.guard';
 import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
+import { InformacionCompletaComponent } from './informacion-completa/informacion-completa.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/clientes', pathMatch: 'full'},
+  {path: 'ver/:nombre', component: InformacionCompletaComponent},
   {path: 'curriculum', component: BodyComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent}
 
@@ -28,7 +29,8 @@ const routes: Routes = [
     InformacionPersonalComponent,
     ExperienciaLaboralComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    InformacionCompletaComponent
   ],
   imports: [
     BrowserModule,
