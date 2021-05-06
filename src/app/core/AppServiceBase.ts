@@ -8,57 +8,30 @@ import {Router} from '@angular/router';
 })
 export class AppServiceBase {
 
-  accessToken: any = '';
-  authToken: any;
-  storage: any;
-
-  headers = new HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .set('Cache-Control', 'no-cache');
-
-  constructor(protected http: HttpClient) {
-
-  }
-
-  getAll(api: string) {
-    const urlApi = `${environment.api.baseUrl}${api}`;
-    return this.http.get(urlApi, {headers: this.headers});
-  }
-
-  getAllTyped(api: string) {
-    const urlApi = `${environment.api.baseUrl}${api}`;
-    return this.http.get<any>(urlApi);
-  }
+  constructor(protected http: HttpClient) {}
 
   getById(api: string, id: number) {
     const urlApi = `${environment.api.baseUrl}${api}/${id}`;
-    return this.http.get(urlApi, {headers: this.headers});
-  }
-
-  getByState(api: string, state: string) {
-    const urlApi = `${environment.api.baseUrl}${api}/${state}`;
-    return this.http.get(urlApi, {headers: this.headers});
+    return this.http.get(urlApi);
   }
 
   post(api: string, body: any) {
     const urlApi = `${environment.api.baseUrl}${api}`;
-    return this.http.post(urlApi, body, {headers: this.headers});
+    return this.http.post(urlApi, body);
   }
 
   put(api: string, body: any) {
     const urlApi = `${environment.api.baseUrl}${api}`;
-    return this.http.put(urlApi, body, {headers: this.headers});
+    return this.http.put(urlApi, body);
   }
 
   update(api: string, body: any) {
     const urlApi = `${environment.api.baseUrl}${api}`;
-    return this.http.put(urlApi, body, {headers: this.headers});
+    return this.http.put(urlApi, body);
   }
 
   delete(api: string, id: string) {
     const urlApi = `${environment.api.baseUrl}${api}/${id}`;
-    return this.http.delete(urlApi, {headers: this.headers});
+    return this.http.delete(urlApi);
   }
-
-
 }

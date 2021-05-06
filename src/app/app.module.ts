@@ -6,14 +6,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BodyComponent } from './body/body.component';
 import { InformacionPersonalComponent } from './informacion-personal/informacion-personal.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ExperienciaLaboralComponent } from './experiencia-laboral/experiencia-laboral.component';
+import { LoginComponent } from './seguridad/usuarios/login.component';
+import { HeaderComponent } from './header/header.component';
+import { AuthGuard } from './usuarios/guards/auth.guard';
+import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 
 const routes: Routes = [
   {path: '', redirectTo: '/clientes', pathMatch: 'full'},
-  {path: 'informacion', component: InformacionPersonalComponent},
-  {path: 'experiencia', component: ExperienciaLaboralComponent}
+  {path: 'curriculum', component: BodyComponent, canActivate:[AuthGuard]},
+  {path: 'login', component: LoginComponent}
 
 ];
 
@@ -22,7 +26,9 @@ const routes: Routes = [
     AppComponent,
     BodyComponent,
     InformacionPersonalComponent,
-    ExperienciaLaboralComponent
+    ExperienciaLaboralComponent,
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

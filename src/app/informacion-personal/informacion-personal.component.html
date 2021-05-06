@@ -4,6 +4,9 @@
   </div>
   <div class="col-md-6 text-right div-body">
     <form #formInformacion="ngForm" class="form">
+
+      <input type="text" name="id" id="id" [(ngModel)]="persona.id">
+
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="nombre">Nombre</label>
@@ -39,7 +42,13 @@
         </div>
       </div>
 
-      <button type="button" class="btn btn-primary" (click)='crearInformacionPersona()'>Guardar</button>
+      <button type="button" class="btn btn-primary" (click)='crearInformacionPersona()' *ngIf="!persona.id else elseBlock">Guardar</button>
+      <ng-template #elseBlock>
+        <button type="button" class="btn btn-primary"
+          (click)='actualizarInformacionPersona()'
+          data-dismiss="modal">Actualizar</button>
+      </ng-template>
+
     </form>
   </div>
 </div>
