@@ -2,10 +2,28 @@
   <div class="col-md-12">
     <h4 class="text-center">Informaci&oacute;n Personal</h4>
   </div>
+  <div>
+    <div class="input-group">
+      <div class="custom-file">
+        <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+        <label class="custom-file-label" for="inputGroupFile04">Seleccionar Foto</label>
+      </div>
+      <div class="input-group-append">
+        <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir Foto</button>
+      </div>
+      <div *ngIf="progreso > 0" class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{width: progreso+'%'}" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100">
+            {{progreso}}
+        </div>
+    </div>
+    </div>
+  </div>
+
   <div class="col-md-6 text-right div-body">
     <form #formInformacion="ngForm" class="form">
 
       <input type="text" name="id" id="id" [(ngModel)]="persona.id">
+      <input type="text" name="user" id="user" [(ngModel)]="persona.usuario.id">
 
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -51,4 +69,10 @@
 
     </form>
   </div>
+
+  <div class="col-sm">
+    <h2>Test FOTO</h2>
+    <img *ngIf="persona?.foto"src="http://localhost:8080/api/informacion/uploads/img/{{persona.foto}}" alt="{{persona.foto}}" class="img-thumbnail rounded">
+  </div>
+
 </div>

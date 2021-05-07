@@ -3,6 +3,9 @@ import { Persona } from '../models/persona';
 import { CurriculumService } from '../services/curriculum.service';
 import Swal from 'sweetalert2';
 import { InfoResult } from '../models/infoResult';
+import { HttpEventType } from '@angular/common/http';
+import { FotoService } from '../services/foto.service';
+import { Usuario } from '../models/Usuario';
 
 @Component({
   selector: 'app-informacion-personal',
@@ -12,14 +15,24 @@ import { InfoResult } from '../models/infoResult';
 export class InformacionPersonalComponent implements OnInit {
 
   persona: Persona = new Persona;
+  usuario: Usuario = new Usuario;
   infoResult: InfoResult[];
   userId:number;
   resultInformacion: InfoResult[];
+  fotoSeleccionada: File;
+  progreso: number=0 ;
 
-  constructor(private curriculumService: CurriculumService) { }
+  constructor(private curriculumService: CurriculumService,
+    private fotoService: FotoService) { }
 
   ngOnInit(): void {
     this.userId = +sessionStorage.getItem('id');
+    this.usuario.id = this.userId;
+    console.log(this.usuario.id);
+
+    this.persona.usuario = this.usuario;
+    console.log(this.userId);
+    console.log(this.persona);
     this.buscarPersonaPorId(this.userId);
   }
 
@@ -28,6 +41,7 @@ export class InformacionPersonalComponent implements OnInit {
       resultInformacion => {
         this.resultInformacion = resultInformacion["data"];
 
+        console.log(this.resultInformacion);
         this.persona.id = this.resultInformacion["id"];
         this.persona.nombre = this.resultInformacion["nombre"];
         this.persona.apellido = this.resultInformacion["apellido"];
@@ -36,6 +50,8 @@ export class InformacionPersonalComponent implements OnInit {
         this.persona.lugarNacimiento = this.resultInformacion["lugarNacimiento"];
         this.persona.telefono = this.resultInformacion["telefono"];
         this.persona.tituloProfesional = this.resultInformacion["tituloProfesional"];
+        this.persona.foto = this.resultInformacion["foto"];
+        this.persona.usuario.id = this.resultInformacion["foto"];
 
         console.log(this.persona);
       }
@@ -70,5 +86,36 @@ export class InformacionPersonalComponent implements OnInit {
           console.error(err.error.errors);
         }
     );
+  }
+
+  seleccionarFoto(event){
+    this.fotoSeleccionada = event.target.files[0];
+    this.progreso = 0;
+    console.log(this.fotoSeleccionada);
+    if(this.fotoSeleccionada.type.indexOf('image')<0){
+      Swal.fire('Error seleccionar imagen: ', 'El archivo debe ser del tipo imagen', 'error');
+      this.fotoSeleccionada = null;
+    }
+  }
+
+  subirFoto(){
+    if(!this.fotoSeleccionada){
+      Swal.fire('Error Upload: ', 'Debe seleccionar una foto', 'error');
+    } else {
+      console.log("FOTO 1");
+      this.fotoService.subirFoto(this.fotoSeleccionada, this.persona.id)
+      .subscribe(event =>{
+        if(event.type === HttpEventType.UploadProgress){
+          console.log("FOTO 2");
+          this.progreso = Math.round((event.loaded/event.total)*100);
+        } else if(event.type === HttpEventType.Response){
+          console.log("FOTO 3");
+          let response: any = event.body;
+          this.persona = response.cliente as Persona;
+          Swal.fire('La foto se ha subido completamente!', response.mensaje, 'success');
+        }
+        //this.cliente = cliente;
+      })
+    }
   }
 }

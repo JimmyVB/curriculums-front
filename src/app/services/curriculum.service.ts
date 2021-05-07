@@ -4,6 +4,7 @@ import { AppServiceBase } from '../core/AppServiceBase';
 import { Persona } from '../models/persona';
 import {catchError, map} from 'rxjs/operators';
 import { ExperienciaLaboral } from '../models/experienciaLaboral';
+import { HttpEvent, HttpRequest } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -68,3 +69,4 @@ export class CurriculumService extends AppServiceBase{
   }
 
 }
+

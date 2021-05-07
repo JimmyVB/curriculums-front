@@ -1,3 +1,5 @@
+import { Usuario } from "./Usuario";
+
 export class Persona {
     id: number;
     nombre: string;
@@ -7,4 +9,6 @@ export class Persona {
     telefono: string;
     fechaNacimiento: Date;
     correo: string;
+    foto: string;
+    usuario: Usuario;
 }
