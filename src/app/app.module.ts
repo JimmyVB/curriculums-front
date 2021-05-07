@@ -16,6 +16,7 @@ import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { InformacionCompletaComponent } from './informacion-completa/informacion-completa.component';
 
 const routes: Routes = [
+  { path: '', component: LoginComponent },
   {path: 'ver/:nombre', component: InformacionCompletaComponent},
   {path: 'curriculum', component: BodyComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent}

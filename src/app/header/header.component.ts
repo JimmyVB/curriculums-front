@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class HeaderComponent implements OnInit {
 
-  title:string = 'Curriculums'
+  title:string = 'Curriculums Vitae'
 
   constructor(public authService: AuthService, private router: Router) { }
 
