@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from './usuarios/guards/auth.guard';
 import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { InformacionCompletaComponent } from './informacion-completa/informacion-completa.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -38,7 +39,8 @@ const routes: Routes = [
     NgbModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}

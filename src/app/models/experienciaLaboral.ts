@@ -1,6 +1,10 @@
+import { Usuario } from "./Usuario";
+
 export class ExperienciaLaboral {
-    titulo: string;
+    empresa: string;
+    puesto: string;
     descripcion: string;
     fechaInicio: string;
     fechaFin: string;
+    usuario: Usuario;
 }

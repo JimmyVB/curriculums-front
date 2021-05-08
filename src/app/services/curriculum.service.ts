@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { AppServiceBase } from '../core/AppServiceBase';
 import { Persona } from '../models/persona';
 import {catchError, map} from 'rxjs/operators';
-import { ExperienciaLaboral } from '../models/experienciaLaboral';
+import { ExperienciasLaborales } from '../models/experienciasLaborales';
 import { HttpEvent, HttpRequest } from '@angular/common/http';
 
 @Injectable({
@@ -51,10 +51,12 @@ export class CurriculumService extends AppServiceBase{
       );
   }
 
-  crearExperienciaLaboral(experienciaLaboral: ExperienciaLaboral): Observable<any> {
-    return this.post('/experiencia/create/', experienciaLaboral)
+  crearExperienciaLaboral(experienciasLaborales: ExperienciasLaborales): 
+  Observable<any> {
+    console.log(experienciasLaborales);
+    return this.post('/experiencia/create/', experienciasLaborales)
       .pipe(
-        map((response: any) => response.experienciaLaboral as ExperienciaLaboral),
+        map((response: any) => response.experienciaLaboral as ExperienciasLaborales),
         catchError(e => {
             if (e.status == 400) {
               return throwError(e);

@@ -1,32 +1,80 @@
-<div class="body">
+<div class="body" style="width: 50%;">
   <div class="col-md-12">
     <h4 class="text-center">Experiencia Laboral</h4>
   </div>
-  <div class="col-md-6 text-right div-body">
-    <form #formInformacion="ngForm" class="form">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="titulo">Titulo</label>
-          <input type="text" class="form-control" name="titulo" id="titulo" [(ngModel)]="experienciaLaboral.titulo">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="descripcion">Descripcion</label>
-          <input type="text" class="form-control" name="descripcion" id="descripcion"
-            [(ngModel)]="experienciaLaboral.descripcion">
+  <div>
+    <form [formGroup]="formulario" class="form">
+      <div class="form-row" formArrayName="experienciaLaboral">
+        <div *ngFor="let trabajo of formulario.controls.experienciaLaboral['controls']; let i = index;" [formGroupName]="i">
+          <div class="form-group col-md-6">
+            <label for="empresa">Empresa:</label><br />
+            <input name="empresa" type="text" formControlName="empresa"/>
+          </div>
+          <div>
+            <label>Puesto:</label><br />
+            <input name="puesto" type="text" formControlName="puesto"/>
+          </div>
+          <div>
+            <label>Descripción:</label><br />
+            <textarea formControlName="descripcion"></textarea>
+          </div>
+          <div>
+            <label>Fecha Inicio:</label><br />
+            <input name="fechaInicio" type="text" formControlName="fechaInicio"/>
+          </div>
+          <div>
+            <label>Fecha Fin:</label><br />
+            <input name="fechaFin" type="text" formControlName="fechaFin"/>
+          </div>
+          <div>
+            <button (click)="borrarTrabajo(i)">Borrar</button>
+          </div>
+          <hr />
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inicio">Fecha Inicio</label>
-          <input type="text" class="form-control" name="inicio" id="inicio"
-            [(ngModel)]="experienciaLaboral.fechaInicio">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="fin">Fecha Fin</label>
-          <input type="text" class="form-control" name="fin" id="fin" [(ngModel)]="experienciaLaboral.fechaFin">
-        </div>
-      </div>
+      <button (click)="anadirExperienciaLaboral()">
+        + Añadir
+      </button>
       <button type="button" class="btn btn-primary" (click)='crearExperienciaLaboral()'>Guardar</button>
     </form>
+
+    <!-- <form [formGroup]="formulario"  #formInformacion="ngForm" class="form">
+      <div class="form-row" formArrayName="experienciaLaboral">
+        <div *ngFor="let trabajo of experienciaLaboral.controls; let i = index;" >
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="titulo">Titulo</label>
+              <input type="text" class="form-control" name="titulo" id="titulo" [(ngModel)]="expLaboral.titulo">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="descripcion">Descripcion</label>
+              <input type="text" formControlName="descripcion" class="form-control" name="descripcion" id="descripcion"
+                [(ngModel)]="expLaboral.descripcion">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inicio">Fecha Inicio</label>
+              <input type="text" class="form-control" name="inicio" id="inicio"
+                [(ngModel)]="expLaboral.fechaInicio">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="fin">Fecha Fin</label>
+              <input type="text" class="form-control" name="fin" id="fin" [(ngModel)]="expLaboral.fechaFin">
+            </div>
+          </div>
+          <div>
+            <button (click)="borrarTrabajo(i)">Borrar</button>
+          </div>
+          <hr />
+        </div>
+      </div>
+
+      <button (click)="anadirExperienciaLaboral()">
+        + Añadir
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)='crearExperienciaLaboral()'>Guardar</button>
+    </form> -->
   </div>
 </div>

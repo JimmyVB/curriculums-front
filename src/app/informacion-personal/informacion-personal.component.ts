@@ -31,8 +31,6 @@ export class InformacionPersonalComponent implements OnInit {
     console.log(this.usuario.id);
 
     this.persona.usuario = this.usuario;
-    console.log(this.userId);
-    console.log(this.persona);
     this.buscarPersonaPorId(this.userId);
   }
 
@@ -51,15 +49,14 @@ export class InformacionPersonalComponent implements OnInit {
         this.persona.telefono = this.resultInformacion["telefono"];
         this.persona.tituloProfesional = this.resultInformacion["tituloProfesional"];
         this.persona.foto = this.resultInformacion["foto"];
-        this.persona.usuario.id = this.resultInformacion["foto"];
-
+        this.persona.usuario.id = this.resultInformacion["id"];
+        console.log("55");
         console.log(this.persona);
       }
     );
   }
 
   crearInformacionPersona(): void {
-    console.log(this.persona);
     this.curriculumService.crearInformacionPersonal(this.persona)
       .subscribe(
         () => {
